@@ -1,0 +1,946 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<LeantIt.Web.Models.CarroModel>
+@inject SignInManager<AplicacaoUser> SignInManager
+@inject UserManager<AplicacaoUser> UserManager
+
+@{
+    ViewData["Title"] = "Início";
+}
+
+<header>
+
+    <nav class="mobile-nav">
+        <div>
+            <a asp-area="" asp-controller="Home" asp-action="Index"><img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711075/logo_recorte_dxihjz.png" class="logo-mobile" style="cursor: pointer;" /></a>
+        </div>
+        <div style="display: flex; flex-direction: row; gap: 30px;">
+            <div>
+                <a asp-area="" asp-controller="OurServices" asp-action="Index" style="color: black;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-car-front-fill" viewBox="0 0 16 16" style="cursor: pointer;">
+                        <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z" />
+                    </svg>
+                </a>
+            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li style="text-decoration: none; list-style-type: none;">
+                    <a style="color: #000;" id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </a>
+                </li>
+                <li style="text-decoration: none; list-style-type: none;">
+                    @if (ViewBag.Pendente == null)
+                    {
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button style="border:none; background-color: transparent;" id="logout" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                                </svg>
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button style="text-decoration=none; list-style-type: none; border: none; background: none;" id="pendente"><a style="color: #000;" asp-action="Pendente" asp-controller="CarroEscolhido" asp-area="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                </svg>
+                        </a></button>
+
+                    }
+                </li>
+            }
+            else
+            {
+                <div>
+                    <a asp-area="Identity" asp-page="/Account/Login" style="color: black;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16" style="cursor: pointer;">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </a>
+                </div>
+            }
+        </div>
+    </nav>
+
+    <a><img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711075/logo_recorte_dxihjz.png" class="logo"></a>
+    <nav class="navbar-desktop">
+        <ul>
+            <li><a asp-action="Index" asp-area="" asp-controller="Home" class="button-home">Home</a></li>
+            <li><a asp-area="" asp-controller="OurServices" asp-action="Index">Categorias</a></li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item dropdown">
+                    <a href="#">Admin</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="add" asp-area="" asp-controller="Carros" asp-action="Adicionar">Add Carro</a></li>
+                        <li><a class="listando" asp-area="" asp-controller="Carros" asp-action="Listar">Listar Carros</a></li>
+                        <li>
+                            <a class="add" id="register" asp-area="Identity" asp-page="/Account/Register">Registrar</a>
+                        </li>
+                        <li><a class="listando" asp-area="" asp-action="Index" asp-controller="Dashboard">Dash</a></li>
+                        <li><a class="add" asp-area="" asp-action="AdicionarMP" asp-controller="ChatBot">Add ChatBot</a></li>
+                        <li><a class="listando" asp-area="" asp-action="Index" asp-controller="ChatBot">Listar ChatBot</a></li>
+                    </ul>
+                </li>      
+            }
+            <partial name="_LoginPartial" />
+    </nav>
+
+    <article class="article-description">
+        <p class="paragraph-welcome">Bem-vindo ao LeanIt</p>
+
+        <h1>
+            Dirija a <span class="destaque-title"> Experiência</span>
+            de se sentir bem
+        </h1>
+
+        <img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711071/elemento_titulos_ulz1x5.png" class="line-style-orange" width="145rem" height="25rem">
+
+        <p class="paragraph-description">Desbrave novos horizontes com nosso serviço de aluguel de carros por viagem. Liberte-se da rotina, escolha o seu caminho. Clique em <span class="destaque-saber-mais">Alugue Aqui</span> e descubra como reinventamos a maneira de viajar.</p>
+
+        <button class="article-description-button botao-para-transicao">Alugue Aqui</button>
+
+    </article>
+</header>
+<main>
+    <aside class="aside-info">
+        <div>
+            <p class="paragraph-bold-info">@ViewBag.QntCarros+</p>
+            <p>Carros</p>
+        </div>
+
+        <div class="hora">
+            <p class="paragraph-bold-info">R$12</p>
+            <p>Por Hora</p>
+        </div>
+
+        <div>
+            <p class="paragraph-bold-info">@ViewBag.QntPessoas</p>
+            <p>Cadastros</p>
+        </div>
+
+        <div class="cidades">
+            <p class="paragraph-bold-info">5+</p>
+            <p>Cidades</p>
+        </div>
+    </aside>
+
+    <article class="article-main">
+
+        <div class="article-main-text">
+            <h2 class="precos">Preços</h2>
+            <h1 class="paragrafo">Melhores preços para você e sua <span class="destaque-familia">família</span></h1>
+
+            <img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711071/elemento_titulos_ulz1x5.png" class="line-style-orange-article-main" width="145rem" height="25rem">
+        </div>
+
+        <div class="cards">
+
+            <div class="card-1">
+                <div class="card-content">
+                    <h3 class="card-title">Básico</h3>
+                    <p class="paragraph-hour"><span class="value-hour">R$12/</span>hora</p>
+                    <p class="paragraph-description-categories">Carros básicos, perfeitos para deslocamentos eficientes. Economia sem sacrificar o conforto. Ideal para trajetos urbanos e viagens descomplicadas.</p>
+                </div>
+
+                <div class="button-container">
+                    <a asp-area="" asp-controller="OurServices" asp-action="Index">
+                        <button>Saber Mais</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-2">
+                <div class="card-content">
+                    <h3 class="card-title">Família</h3>
+                    <p class="paragraph-hour"><span class="value-hour">R$15/</span>hora</p>
+                    <p class="paragraph-description-categories">Espaço e conforto definem nossa categoria de carros para famílias. Viaje com estilo e comodidade, proporcionando uma experiência agradável para todos os passageiros.</p>
+                </div>
+
+                <div class="button-container">
+                    <a asp-area="" asp-controller="OurServices" asp-action="Index">
+                        <button>Saber Mais</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-3">
+                <div class="card-content">
+                    <h3 class="card-title">Carga</h3>
+                    <p class="paragraph-hour"><span class="value-hour">R$21/</span>hora</p>
+                    <p class="paragraph-description-categories">A opção ideal para transportar seus itens com segurança e eficiência, tornando cada viagem uma experiência conveniente e personalizada.</p>
+                </div>
+
+                <div class="button-container">
+                    <a asp-area="" asp-controller="OurServices" asp-action="Index">
+                        <button>Saber Mais</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </article>
+    <div class="passoPasso">
+
+        <div class="comoFunciona">
+            <h1>Como funciona</h1>
+
+        <img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711071/elemento_titulos_ulz1x5.png" class="passoLinha" width="145rem" height="25rem">
+        </div>
+
+        <div style="display:flex;" class="mainWorks">
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897873/imagem1-removebg-preview_mwwy1k.png" alt="">
+                <p>Faça seu cadastro</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897874/imagem2-removebg-preview_s0cszw.png" alt="">
+                <p>Escolha um veículo</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897873/imagem3-removebg-preview_x6mvkv.png" alt="">
+                <p style="margin-left:20px">Vá até o veículo</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897873/imagem4-removebg-preview_vwvw9c.png" alt="">
+                <p>Aproveite</p>
+            
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897873/imagem5-removebg-preview_hx9qbu.png" alt="">
+                <p style="margin-left:15px">Retorne ao ponto</p>
+                <p style="margin-left: 35px;">de partida</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/dubnbered/image/upload/v1706897873/imagem6-removebg-preview_cyjt40.png" alt="">
+                <p>Efetue o pagamento</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<aside class="aside-search-localization">
+    <div class="paragraph-map" style="width: 100%;">
+        <p>Escolha seu carro</p>
+        <p class="paragraph-right-map">LeanIt é a sua melhor escolha</p>
+    </div>
+    <div class="todasInfos">
+        <div class="tudoVc" id="tudoVc">
+            <h1>
+                Sua localização
+            </h1>
+            <div class="infoVc">
+                <div class="inputVc">
+                    <input id="pac-input" type="text" placeholder="Digite sua localização">
+                </div>
+                <div class="select">
+                    <select id="opcoesDeViagens">
+                        <option>Selecione</option>
+                        <option value="WALKING">A pé</option>
+                        <option value="DRIVING">Carro</option>
+                        <option value="BICYCLING">Bicicleta</option>
+                        <option value="TRANSIT">Transporte</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tudoDestino">
+            <h1>
+                Seu destino
+            </h1>
+            <div class="infoDestino">
+                <div class="inputDestino">
+                    <input class="destino" id="pac-destino" type="text" placeholder="Digite seu destino">
+                </div>
+                <div class="botaoDestino">
+                    <button class="buttonPesquisar">Gerar rota</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* <div class="form-map">
+        <div class="labels">
+            <label class="labelLoc">Sua localização</label>
+            <label class="labelDestino">Seu destino</label>
+        </div>
+        <div class="search-map">
+            <div class="loc">
+                <div>
+                    <input id="pac-input" type="text" placeholder="Digite sua localização">
+                </div>
+
+                <select id="opcoesDeViagens">
+                    <option>Selecione transporte</option>
+                    <option value="WALKING">A pé</option>
+                    <option value="DRIVING">Carro</option>
+                    <option value="BICYCLING">Bicicleta</option>
+                    <option value="TRANSIT">Transporte</option>
+                </select>
+
+            </div>
+            <div class="escolhaDestino">
+                <div>
+                    <input class="destino" id="pac-destino" type="text" placeholder="Digite seu destino">
+                    <button class="buttonPesquisar">Gerar rota</button>
+                </div>
+            </div>
+        </div>
+    </div> *@
+    @* <div class="form-map-responsive" >
+        <div style="display: flex; flex-direction: column;">
+            <label>Sua localização</label>
+            <div>
+                <input id="pac-input" type="text" placeholder="Digite sua localização">
+                <select id="opcoesDeViagens">
+                    <option>Selecione</option>
+                    <option value="WALKING">A pé</option>
+                    <option value="DRIVING">Carro</option>
+                    <option value="BICYCLING">Bicicleta</option>
+                    <option value="TRANSIT">Transporte</option>
+                </select>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <label>Sua localização</label>
+            <div">
+                <input class="destino" id="pac-destino" type="text" placeholder="Digite seu destino">
+                <button class="buttonPesquisar">Gerar rota</button>
+            </div>
+            
+        </div>
+    </div> *@
+
+    @* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227806.87476532854!2d-49.099103799999995!3d-26.85640995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df1e408b5c3095%3A0xacfb8520bc1a7644!2sBlumenau%2C%20SC!5e0!3m2!1spt-BR!2sbr!4v1699039096703!5m2!1spt-BR!2sbr" width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
+
+    <div id="map" style="width: 100%; height:650px"></div>
+
+</aside>
+<aside>
+
+    <div class="avaliacaoMain">
+
+        <h2>Avaliações dos Usuários</h2>
+
+        <img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711071/elemento_titulos_ulz1x5.png" class="line-style-orange-article-main" width="145rem" height="25rem">
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <div class="item-carousel-content">
+
+                        <h3>Roberto</h3>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <p>O LeanIt tornou o processo de aluguel de carros incrivelmente fácil e rápido. Com apenas alguns cliques, consegui alugar o veículo ideal para minha viagem. Sem complicações, sem demoras - apenas eficiência pura.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="carousel-item">
+                    <div class="item-carousel-content">
+                        <h3>Sabrina</h3>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <p>Com uma ampla seleção de veículos e preços competitivos, o LeanIt oferece opções para todos os gostos e orçamentos. Não importa se você precisa de um carro compacto ou de um SUV espaçoso, o LeanIt tem tudo a oferecer.</p>
+
+                    </div>
+
+                </div>
+                <div class="carousel-item">
+                    <div class="item-carousel-content">
+
+                        <h3>Marcos</h3>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Orange" class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
+
+                        <p>O atendimento ao cliente do LeanIt é simplesmente excepcional. A equipe está sempre pronta para ajudar com qualquer dúvida ou problema, proporcionando uma experiência confiável e tranquila. Recomendo sem hesitar!</p>
+
+                    </div>
+
+                </div>
+            </div>
+            <button id="prevBtn" style="margin-left: 4vw;">
+                <i class="fa-solid fa-arrow-right fa-flip-horizontal" style="color: #ffffff;"></i>
+
+            </button>
+            <button id="nextBtn" style="margin-right: 5vw;">
+                <i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i>
+
+            </button>
+        </div>
+    </div>
+</aside>
+
+
+<footer>
+
+    <div class="footer-main">
+        <div class="footer-about">
+            <p class="footer-title">Sobre a LeanIt</p>
+            <p class="footer-paragraph-about">Nós levamos a outro nível a locomoção por meio de nossa tecnologia</p>
+            <div class="icons-about"><a href="#"><i class="fa-brands fa-youtube"></a></i> <a href="#"><i class="fa-brands fa-facebook"></a></i> <a href="#"><i class="fa-brands fa-instagram"></i></a> <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a></div>
+        </div>
+
+        <div class="footer-extra">
+            <p class="footer-title">Nossa Página</p>
+            <p>@Html.ActionLink("Nosso blog", "Index", "Blog")</p>
+            <p><a href="https://www.entra21.com.br/" target="_blank">Entra21</a></p>
+            <p>@Html.ActionLink("Guia Turístico", "Index", "Turismo")</p>
+            <p>@Html.ActionLink("Termos de Uso", "Index", "Termos")</p>
+        </div>
+
+        <div class="footer-contact">
+            <p class="footer-title">Contate-nos</p>
+            <p class="paragraph-contact paragraph-contact-top"><i class="fa-solid fa-phone phone-icon"></i>+55 (47) 9999-9999</p>
+            <p class="paragraph-contact"><i class="fa-solid fa-envelope email-icon"></i><a href="#">contact@leanit.com</a></p>
+        </div>
+    </div>
+
+    <p class="footer-copyright">Copyright © 2023 All rights deserved</p>
+
+</footer>
+
+<div class="card">
+    <div class="chat-header">Chat LeanIt</div>
+    <div class="chat-window">
+        <ul class="message-list"></ul>
+    </div>
+    <div class="chat-input">
+        <input type="text" class="message-input" placeholder="Digite sua dúvida">
+        <button class="send-button">Enviar</button>
+    </div>
+</div>
+<div id="botao-chat">
+    <div class="tooltip-container">
+        <span class="tooltip">Precisa de ajuda?</span>
+        <span class="text">
+            <div class="borde-back">
+                <div class="icon">
+                    <img src="https://res.cloudinary.com/dubnbered/image/upload/v1707949531/conversando_1_z0uqlf.png" />
+                </div>
+            </div>
+        </span>
+    </div>
+</div>
+
+@* <div id="alerta" class="alerta">
+  <span class="fechar" onclick="fecharAlerta()">×</span>
+  <p>Seu conteúdo de alerta aqui</p>
+</div> *@
+
+<div id="alerta" class="card-news">
+    <div class="header-news">
+        <span class="icon-news">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 20 20"
+                 fill="currentColor">
+                <path fill-rule="evenodd"
+                      d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z"
+                      clip-rule="evenodd"></path>
+            </svg>
+        </span>
+        <p class="alert-news">Nova Mensagem!</p>
+        <button class="closeButton" onclick="fecharAlerta()">x</button>
+    </div>
+
+    <p class="message-news">
+        Comunicamos à todos, que no dia 28/02 às 14h30 no teatro Carlos Gomes em Bluemanu, estaremos presentes na mostra de talentos do ENTRA21 para apresentar este sistema.
+    </p>
+
+    <div class="actions-news">
+        <button onclick="fecharAlerta()" class="read-news">Irei comparecer!</button>
+    </div>
+</div>
+
+
+@* <div class="card">
+    <div class="chat-header">Chat</div>
+    <div class="chat-window">
+        <div class="message-list">
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input type="text" class="message-input" placeholder="Type your message here">
+        <button class="send-button">Send</button>
+    </div>
+</div>
+<button id="botao-chat">Abrir Chat</button>
+ *@
+
+
+
+
+
+
+
+
+
+
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" />
+}
+
+
+@section Scripts {
+    <script>
+
+        var lat;
+        var lng;
+        var passou = false
+        var passouHandleMarkerClick = false
+        var enderecoSemPlusCode
+        var enderecoSemPlusCode2 = null
+        var arrayMarcadores = [];
+
+        //Function para o GeoLocation
+
+        function success(pos) {
+            lat = pos.coords.latitude;
+            lng = pos.coords.longitude;
+            passou = true
+            initMap();
+        }
+
+        navigator.geolocation.getCurrentPosition(success);
+
+        //
+
+        var meuIcon = 'https://res.cloudinary.com/dubnbered/image/upload/v1702342339/pin-do-mapa_okjn2q.png';
+
+        //Iniciando o mapa, caso o usuário tenha o GeoLocation ele cai no if se não no else
+
+        function initMap() {
+            if (passou == true) {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: { lat: lat, lng: lng } //Posição do usuário através do GeoLocation
+                });
+
+                var marker = new google.maps.Marker({
+                    position: { lat: lat, lng: lng },
+                    map: map,
+                    icon: meuIcon,
+                    animation: google.maps.Animation.DROP
+                });
+            }
+            else {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: { lat: -26.917231, lng: - 49.071175 } //Centro de Blumenau
+                });
+            }
+
+
+            var array = [];
+            var icon = 'https://res.cloudinary.com/dtvypcack/image/upload/v1702156334/image-removebg-preview_5_vjrfkz_iq0hzk.png';
+
+            //Input de onde o usuário está. Dá locais conforme o usuário está digitando
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length === 0) {
+                    return;
+                }
+
+                //Pega a informação do lugar selecionado
+                var selectedPlace = places[0];
+                console.log(selectedPlace);
+
+                //Atualiza o mapa com a localização atualizada
+                map.setCenter(selectedPlace.geometry.location);
+            });
+
+
+            //Input de onde o usuário vai. Dá locais conforme o usuário está digitando
+            var inputDestino = document.getElementById('pac-destino');
+            var searchBox2 = new google.maps.places.SearchBox(inputDestino);
+
+            searchBox2.addListener('places_changed', function () {
+                var places = searchBox2.getPlaces();
+
+                if (places.length === 0) {
+                    return;
+                }
+
+                //Pega a informação do lugar selecionado
+                var selectedPlace = places[0];
+                console.log(selectedPlace);
+
+                //Atualiza o mapa com a localização atualizada
+                map.setCenter(selectedPlace.geometry.location);
+            });
+
+            let directionsService = new google.maps.DirectionsService();
+            let directionsRenderer = new google.maps.DirectionsRenderer({
+                suppressMarkers: true
+            });
+
+            directionsRenderer.setMap(map);
+
+            // Funcao para limpar marcadores que sao criados atraves de rotas geradas
+            function limparRota(){
+
+                //Confiro se tem marcadores dentro da array, se tiver ele entra
+                if(arrayMarcadores.length > 0){
+
+                    //Faço um for para pecorrer na array e nele tiro os marcadores do mapa usando o setMap null
+                    for (let i = 0; i < arrayMarcadores.length; i++){
+                        arrayMarcadores[i].setMap(null)
+                    }
+
+                    arrayMarcadores = []
+                }
+            }
+
+            //Gera as rotas
+            document.querySelector('.buttonPesquisar').addEventListener('click', function () {
+
+                var modoViagem = document.querySelector('#opcoesDeViagens')
+                var modo = modoViagem.value
+                var atual = input.value;
+                var destino = inputDestino.value;
+
+                console.log(modoViagem)
+
+                let request = {
+                    origin: atual,
+                    destination: destino,
+                    travelMode: modo
+                };
+
+
+                directionsService.route(request, function (result, status) {
+                    if (status == 'OK') {
+
+                        limparRota();
+
+                        //Quando gerar a rota, se o usuário não tiver o Geolocation, ele gera cria o icon de pessoa
+                        if (passou == false) {
+                            directionsRenderer.setDirections(result);
+                            directionsRenderer.setOptions({
+                                polylineOptions: {
+                                    strokeColor: '#ff8110'  // Cor personalizada
+                                }
+                            });
+                            arrayMarcadores.push(new google.maps.Marker({
+                                position: result.routes[0].legs[0].start_location,
+                                map: map,
+                                // icon pessoa
+                                icon: meuIcon,
+                                title: 'Partida',
+                                animation: google.maps.Animation.DROP
+                            }));
+                        }
+                        else if (passou == true && input.value != enderecoSemPlusCode2) {
+                            directionsRenderer.setDirections(result);
+                            directionsRenderer.setOptions({
+                                polylineOptions: {
+                                    strokeColor: '#ff8110'  // Cor personalizada
+                                }
+                            });
+                            arrayMarcadores.push(new google.maps.Marker({
+                                position: result.routes[0].legs[0].start_location,
+                                map: map,
+                                icon: 'https://res.cloudinary.com/dubnbered/image/upload/v1702447989/map-pin_1_pgh2mc.png',
+                                title: 'Partida',
+                                animation: google.maps.Animation.DROP
+                            }));
+                        }
+                        else {
+                            directionsRenderer.setDirections(result);
+                            directionsRenderer.setOptions({
+                                polylineOptions: {
+                                    strokeColor: '#ff8110'  // Cor personalizada
+                                }
+                            });
+                            arrayMarcadores.push(new google.maps.Marker({
+                                position: result.routes[0].legs[0].start_location,
+                                map: map,
+                                title: 'Partida',
+                                icon: 'https://res.cloudinary.com/dubnbered/image/upload/v1702449262/map-pin_2_ijgdu1.png',
+                                animation: google.maps.Animation.DROP
+                            }));
+                        }
+
+                        arrayMarcadores.push(new google.maps.Marker({
+                            position: result.routes[0].legs[0].end_location,
+                            map: map,
+                            icon: 'https://res.cloudinary.com/dubnbered/image/upload/v1702447871/map-pin_dl4zkw.png',
+                            title: 'Chegada',
+                            animation: google.maps.Animation.DROP
+                        }));
+                    }
+                });
+            });
+
+            //Converter os números de longitude e latitude do Geolocation para nome de locais
+            if (passou == true) {
+                var latitude = lat;
+                var longitude = lng;
+                var input = document.getElementById('pac-input');
+                // Converte coordenadas em endereço
+                converterParaEndereco(latitude, longitude);
+            }
+
+            //
+
+            function converterParaEndereco(latitude, longitude) {
+                var latLng = new google.maps.LatLng(latitude, longitude);
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latLng }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            // Obtém o endereço completo
+                            var enderecoCompleto = results[0].formatted_address;
+
+                            // Remove o Plus Code se tiver
+                            enderecoSemPlusCode = enderecoCompleto.replace(/\s[C0-9+]+$/, '');
+
+                            console.log('Endereço:', enderecoSemPlusCode);
+
+                            // Preenche o valor do input de inicio
+                            if (enderecoSemPlusCode2 == null) {
+                                enderecoSemPlusCode2 = enderecoSemPlusCode
+                            }
+
+                            if (passouHandleMarkerClick == true) {
+                                inputDestino.value = enderecoSemPlusCode
+                                passouHandleMarkerClick = false
+                            }
+                            else {
+                                input.value = enderecoSemPlusCode;
+                            }
+
+                            // Obtem a localização mais próxima
+                            obterLocalizacaoMaisProxima(latitude, longitude);
+                        } else {
+                            console.error('Nenhum resultado encontrado');
+                        }
+                    } else {
+                        console.error('Geocodificação falhou devido a:', status);
+                    }
+                });
+            }
+            @if (ViewBag.Pendente == null)
+            {
+                @foreach (var carro in Model)
+                {
+                    //Renderiza os carros no mapa caso o carro esteja disponível
+                    @if (carro.Status != false)
+                    {
+                        <text>
+                            var marker = new google.maps.Marker({
+                                position: { lat: @carro.Latitude, lng: @carro.Longitude },
+                                map: map,
+                                icon: icon,
+                                title: '@carro.Marca'
+                            });
+
+                            var urlImagemCarro;
+
+                            var infoWindow = new google.maps.InfoWindow({
+                                content:
+                                    `
+                                        <div id="car-details">
+                                            @switch (carro.Categoria.Descricao)
+                                            {
+                                                case "Basico":
+                                                    <img id="car-image" src="https://res.cloudinary.com/dubnbered/image/upload/v1702226094/carro_onix_vdns5r_azgtcz.png" alt="Imagem do Carro">
+                                                    break;
+                                                case "Carga":
+                                                    <img id="car-image" src="https://res.cloudinary.com/dubnbered/image/upload/v1706293153/mlp-img-top-2022-sprinter_hwhox5.png" alt="Imagem do Carro">
+                                                    break;
+                                                case "Familia":
+                                                    <img id="car-image" class="car-family" src="https://res.cloudinary.com/dubnbered/image/upload/v1702226094/carro_ecosport_rw5dxh_a1v2gt.png" alt="Imagem do Carro">
+                                                    break;
+                                            }
+                                            <div id="car-info">
+                                                <h2>@carro.Marca @carro.Modelo</h2>
+                                                <p>Modelo: @carro.Modelo</p>
+                                                <p>Ano do Modelo: @carro.Year</p>
+                                                <p>Categoria: @carro.Categoria.Descricao</p>
+                                                </div>
+                                            <div id="choose-car-btn">
+                                                @Html.ActionLink("Selecionar carro", "Index", "CarroEscolhido", new {id = @carro.Id})
+                                            </div>
+                                        </div>
+                                    `,
+                            });
+
+                            array.push({ marker: marker, infoWindow: infoWindow });
+
+                            marker.addListener('click', (function (infoWindow, marker) {
+                                return function () {
+                                    handleMarkerClick(marker);
+                                    // Fechar todas as janelas de informações abertas
+                                    array.forEach(function (item) {
+                                        item.infoWindow.close();
+                                    });
+
+                                    // Abrir a infowindow
+                                    infoWindow.open(map, marker);
+                                };
+                            })(infoWindow, marker));
+                        </text>
+                    }
+
+                }
+            }
+
+        @if (ViewBag.Pendente != null)
+        {
+            <text>
+                    var marker = new google.maps.Marker({
+                        position: { lat: @ViewBag.Pendente.Carro.Latitude, lng: @ViewBag.Pendente.Carro.Longitude },
+                        map: map,
+                        icon: icon,
+                        title: '@ViewBag.Pendente.Carro.Marca'
+                    });
+
+                var urlImagemCarro;
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content:
+                        `
+                            <div id="car-details">
+                                @switch (ViewBag.Pendente.Carro.Categoria.Descricao)
+                                {
+                                    case "Basico":
+                                        <img id="car-image" src="https://res.cloudinary.com/dubnbered/image/upload/v1702226094/carro_onix_vdns5r_azgtcz.png" alt="Imagem do Carro">
+                                        break;
+                                    case "Carga":
+                                        <img id="car-image" src="https://res.cloudinary.com/dubnbered/image/upload/v1706293153/mlp-img-top-2022-sprinter_hwhox5.png" alt="Imagem do Carro">
+                                        break;
+                                    case "Familia":
+                                        <img id="car-image" class="car-family" src="https://res.cloudinary.com/dubnbered/image/upload/v1702226094/carro_ecosport_rw5dxh_a1v2gt.png" alt="Imagem do Carro">
+                                        break;
+                                }
+                                <div id="car-info">
+                                    <h2>@ViewBag.Pendente.Carro.Marca @ViewBag.Pendente.Carro.Modelo</h2>
+                                    <p>Modelo: @ViewBag.Pendente.Carro.Modelo</p>
+                                    <p>Ano do Modelo: @ViewBag.Pendente.Carro.Year</p>
+                                    <p>Categoria: @ViewBag.Pendente.Carro.Categoria.Descricao</p>
+                                </div>
+                                <div id="choose-car-btn">
+                                    @Html.ActionLink("Selecionar carro", "Index", "CarroEscolhido", new { id = @ViewBag.Pendente.Carro.Id })
+                                </div>
+                             </div>
+                        `,
+                });
+
+                array.push({ marker: marker, infoWindow: infoWindow });
+
+                marker.addListener('click', (function (infoWindow, marker) {
+                    return function () {
+                        handleMarkerClick(marker);
+                        // Fechar todas as janelas de informações abertas
+                        array.forEach(function (item) {
+                            item.infoWindow.close();
+                        });
+
+                        // Abrir a infowindow
+                        infoWindow.open(map, marker);
+                    };
+                })(infoWindow, marker));
+            </text>
+        }
+
+            function handleMarkerClick(marker) {
+                // Obter a posição do marcador clicado
+                var position = marker.getPosition();
+
+                // Agora você pode usar position.lat() e position.lng() conforme necessário
+                console.log('Latitude:', position.lat());
+                console.log('Longitude:', position.lng());
+                passouHandleMarkerClick = true;
+
+                converterParaEndereco(position.lat(), position.lng())
+                // Adicione lógica adicional com base na posição do marcador clicado
+            }
+        }
+
+        document.querySelector('.botao-para-transicao').addEventListener('click', function () {
+            document.querySelector('#tudoVc').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh7XqulgkrxKP_wwrWE4fX_dECUGI6xhI&libraries=places&callback=initMap">
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/contagemMinutos.js"></script>
+}

@@ -1,0 +1,150 @@
+﻿@model X.PagedList.IPagedList<LeantIt.Web.Models.CarroModel>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+<header>
+
+    <a><img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711075/logo_recorte_dxihjz.png" class="logo"></a>
+    <nav>
+        <ul>
+            <li><a asp-action="Index" asp-area="" asp-controller="Home">Home</a></li>
+            <li><a asp-area="" asp-controller="OurServices" asp-action="Index">Categorias</a></li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item dropdown">
+                    <a href="#" style="color: #FF8110">Admin</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="add" asp-area="" asp-controller="Carros" asp-action="Adicionar">Add Carro</a></li>
+                        <li><a class="listando" asp-area="" asp-controller="Carros" asp-action="Listar">Listar Carros</a></li>
+                        <li>
+                            <a class="add" id="register" asp-area="Identity" asp-page="/Account/Register">Registrar</a>
+                        </li>
+                        <li><a class="dash, listando" asp-area="" asp-action="Index" asp-controller="Dashboard">Dash</a></li>
+                        <li><a class="add" asp-area="" asp-action="AdicionarMP" asp-controller="ChatBot">Add ChatBot</a></li>
+                        <li><a class="listando" asp-area="" asp-action="Index" asp-controller="ChatBot">Listar ChatBot</a></li>
+                    </ul>
+                </li>
+            }
+            <partial name="_LoginPartial" />
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <div style="margin-bottom: 3vh;">
+            <!-- Aqui, basicamente o valor da option é a URL que deve ser direcionado, se for o caso, perceba como a URL muda quando seleciona alguma opção...
+                Quando o valor do <select> é alterado, a propriedade location (window) é ajustada para o value que foi clicado,
+                this.value
+            -->
+            <select class="search-select" id="sortOrder" onchange="location = this.value;">
+                <option value="">Filtrar</option>
+                <option value="@Url.Action("Listar", new { sortOrder = "nome_asc" })">Nome Crescente</option>
+                <option value="@Url.Action("Listar", new { sortOrder = "nome_desc" })">Nome Decrescente</option>
+            </select>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="main-content">
+                    <div class="title-content">
+                        <div>
+                            <h1>@item.Marca @item.Modelo</h1>
+                        </div>
+                        <div>
+                            <h1>@item.Placa</h1>
+                        </div>
+                    </div>
+                    <div class="id-content">
+                        <p>Id: @item.Id</p>
+                    </div>
+                    <form>
+                        <div class="botoesAcao">
+                            <div class="botaoEditar">
+                                @Html.ActionLink("Editar" , "Editar", new {id = @item.Id})
+                            </div>
+                                
+                            <div class="botaoRemover">
+                                @Html.ActionLink("Remover" , "Remover", new {id = @item.Id})
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        
+
+        <div class="pagedList">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("listar",
+                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</main>
+
+
+<footer>
+
+    <div class="footer-main">
+        <div class="footer-about">
+            <p class="footer-title">Sobre a LeanIt</p>
+            <p class="footer-paragraph-about">Nós levamos a outro nível a locomoção por meio de nossa tecnologia</p>
+            <div class="icons-about"><i class="fa-brands fa-youtube"></i> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-instagram"></i> <i class="fa-brands fa-square-x-twitter"></i></div>
+        </div>
+
+        <div class="footer-extra">
+            <p class="footer-title">Nossa Página</p>
+            <p>@Html.ActionLink("Nosso blog", "Index", "Blog")</p>
+            <p><a href="https://www.entra21.com.br/" target="_blank">Entra21</a></p>
+            <p>@Html.ActionLink("Guia Turístico", "Index", "Turismo")</p>
+            <p>@Html.ActionLink("Termos de Uso", "Index", "Termos")</p>
+        </div>
+
+        <div class="footer-contact">
+            <p class="footer-title">Contate-nos</p>
+            <p class="paragraph-contact paragraph-contact-top"><i class="fa-solid fa-phone phone-icon"></i>+55 (47) 9999-9999</p>
+            <p class="paragraph-contact"><i class="fa-solid fa-envelope email-icon"></i><a href="#">contact@leanit.com</a></p>
+        </div>
+    </div>
+
+    <p class="footer-copyright">Copyright © 2023 All rights deserved</p>
+
+</footer>
+
+
+
+@section Styles {
+
+    <link rel="stylesheet" href="~/css/listar.css" />
+}
+
+@section Scripts {
+
+@*     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Adiciona um ouvinte de evento ao campo de pesquisa
+        document.getElementById("searchString").addEventListener("input", function () {
+            atualizarPesquisa();
+        });
+
+        function atualizarPesquisa() {
+            var form = document.getElementById("searchForm");
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open(form.method, form.action, true);
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("resultadoPesquisa").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send(formData);
+        }
+    });
+</script> *@
+<script src="~/js/contagemMinutos.js"></script>
+}

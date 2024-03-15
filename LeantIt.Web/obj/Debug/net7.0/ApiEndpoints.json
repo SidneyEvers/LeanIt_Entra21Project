@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "LeantIt.Web.Controllers.ImagensCloudController",
+    "Method": "CarregarImagemParaCloud",
+    "RelativePath": "api/ImagensCloud/carregar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "imagem",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,267 @@
+﻿@page
+@using LeantIt.Web.Models
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registre-se";
+}
+
+@inject SignInManager<AplicacaoUser> SignInManager
+
+<header>
+    <a asp-area="" asp-controller="Home" asp-action="Index"><img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711075/logo_recorte_dxihjz.png" class="logo"></a>
+    <nav class="mobile-nav">
+        <div>
+            <a asp-area="" asp-controller="Home" asp-action="Index"><img src="https://res.cloudinary.com/dtvypcack/image/upload/v1701711075/logo_recorte_dxihjz.png" class="logo-mobile" style="cursor: pointer;" /></a>
+        </div>
+    </nav>
+</header>
+
+
+<div class="tituloInformacao">
+    <h3>Informações pessoais</h3>
+</div>
+
+<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div style="color: red;" asp-validation-summary="ModelOnly" class="text-danger informacoesPessoais" role="alert"></div>
+    <div class="informacoesPessoais">
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.Nome">Nome completo</label>
+            <div class="inp inpSemDate">
+                <input asp-for="Input.Nome" type="text"id="nomeCadastro" placeholder="Digite seu nome completo">
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.Nome" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.CPF">CPF</label>
+            <div class="inp inpSemDate">
+                <input asp-for="Input.CPF" id="cpfCadastro" autocomplete="username" aria-required="true" onblur="validaCPF()" placeholder="xxx.xxx.xxx-xx">
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.CPF" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.CNH">CNH</label>
+            <div class="inp inpSemDate">
+                <input asp-for="Input.CNH" autocomplete="username" aria-required="true" placeholder="Digite sua CNH" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.CNH" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.DataNascimento">Data de nascimento</label>
+            <div class="inp"> 
+                <input type="Date" asp-for="Input.DataNascimento"  autocomplete="username" aria-required="true" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.DataNascimento" class="text-danger"></span>
+            </div>
+        </div> 
+    </div>
+
+    <div style="margin-top: -5px;" class="informacoes2">
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.Telefone">Telefone</label>
+            <div class="inp">
+                <input asp-for="Input.Telefone" autocomplete="username" aria-required="true" placeholder="Digite seu telefone" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.Telefone" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.Celular">Celular</label>
+            <div class="inp">
+                <input asp-for="Input.Celular" id="celularCadastro" placeholder="Digite seu celular">
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <label asp-for="Input.Email">E-mail</label>
+            <div class="inp">
+                <input asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="Digite seu e-mail" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="margin-bottom:20px;">
+            <div class="escolhaSexo">
+                <label asp-for="Input.Sexo">Sexo</label>
+                <div class="inpSexo">
+                    <div class="inpSexoMasc">
+                        <input name="Input.Sexo" aria-required="true" type="radio" value="Masculino" asp-for="Input.Sexo" />
+                        <label asp-for="Input.Sexo">Masculino</label>
+                    </div>
+                    <div class="inpSexoFemi">
+                        <input name="Input.Sexo" aria-required="true" type="radio" value="Feminino" asp-for="Input.Sexo" />
+                        <label asp-for="Input.Sexo">Feminino</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="senhas">
+        <div style="margin-bottom:30px;">
+            <label asp-for="Input.Password">Senha</label>
+            <div class="inp">
+                <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="Digite sua senha" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.ConfirmPassword">Confirmar senha</label>
+            <div class="inp">
+                <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="Confirme sua senha" />
+            </div>
+            <div>
+                <span style="color: red;" asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <label asp-for="Input.SelecionarRole">Funções</label>
+                <div class="inp">
+                    <select class="select" asp-for="Input.SelecionarRole" asp-items="Model.Input.SelectRoles" class="form-control"></select>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="senhas marcadorTermo">
+        <input type="checkbox" id="check" name="marcado">
+        <label> Eu concordo com os <a asp-action="Index" asp-controller="Termos" asp-area="" style="color: #ff8110">Termos de Uso</a> e <a asp-action="Index" asp-controller="Termos" asp-area="" style="color: #ff8110">Política de Privacidade</a></label>
+    </div>
+    <div class="confirmarCadastro">
+        <button class="botaoCadastro" type="submit" disabled>Cadastre-se</button>
+        @if (Model.Aluguel == null)
+        {
+            <a class="voltarLogin" asp-area="Identity" asp-page="/Account/Login">Voltar para o login</a>
+        }
+    </div>
+</form>
+<footer>
+
+    <div class="footer-main">
+        <div class="footer-about">
+            <p class="footer-title">Sobre a LeanIt</p>
+            <p class="footer-paragraph-about">Nós levamos a outro nível a locomoção por meio de nossa tecnologia</p>
+            <div class="icons-about"><i class="fa-brands fa-youtube"></i> <i class="fa-brands fa-facebook"></i> <i class="fa-brands fa-instagram"></i> <i class="fa-brands fa-square-x-twitter"></i></div>
+        </div>
+
+        <div class="footer-extra">
+            <p class="footer-title">Nossa Página</p>
+            <p><a asp-area="" asp-controller="Blog" asp-action="Index">Nosso blog</a></p>
+            <p><a href="https://www.entra21.com.br/" target="_blank">Entra21</a></p>
+            <p><a asp-area="" asp-controller="Turismo" asp-action="Index">Guia Turístico</a></p>
+            <p><a asp-area="" asp-controller="Termos" asp-action="Index">Termos de Uso</a></p>
+        </div>
+
+        <div class="footer-contact">
+            <p class="footer-title">Contate-nos</p>
+            <p class="paragraph-contact paragraph-contact-top"><i class="fa-solid fa-phone phone-icon"></i>+55 (47) 9999-9999</p>
+            <p class="paragraph-contact"><i class="fa-solid fa-envelope email-icon"></i><a href="#">contact@leanit.com</a></p>
+        </div>
+    </div>
+
+    <p class="footer-copyright">Copyright © 2023 All rights deserved</p>
+
+</footer>
+@* <div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.CNH" class="form-control" autocomplete="username" aria-required="true" placeholder="CNH" />
+                <label asp-for="Input.CNH">CNH</label>
+                <span asp-validation-for="Input.CNH" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.CPF" class="form-control" autocomplete="username" aria-required="true" placeholder="CPF" />
+                <label asp-for="Input.CPF">CPF</label>
+                <span asp-validation-for="Input.CPF" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Sexo" class="form-control" autocomplete="username" aria-required="true" placeholder="Sexo" />
+                <label asp-for="Input.Sexo">Sexo</label>
+                <span asp-validation-for="Input.Sexo" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Telefone" class="form-control" autocomplete="username" aria-required="true" placeholder="Telefone" />
+                <label asp-for="Input.Telefone">Telefone</label>
+                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="Date" asp-for="Input.DataNascimento" class="form-control" autocomplete="username" aria-required="true" placeholder="Telefone" />
+                <label asp-for="Input.DataNascimento">DataNascimento</label>
+                <span asp-validation-for="Input.DataNascimento" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/register.js"></script>
+    <script src="~/js/contagemMinutos.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+
+@section Styles{
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/register.css" />
+    }

@@ -1,0 +1,1615 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+header {
+    width: 100%;
+    background-image: url(https://res.cloudinary.com/dtvypcack/image/upload/v1701711044/pexels-photo-14550540_qvrfkz.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 95vh;
+    position: relative;
+    z-index: 1;
+}
+
+#logout {
+    cursor: pointer;
+}
+
+.logo {
+    margin: 7vh 0 0 10vh;
+    width: 20vh;
+    height: 5vh;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+#map {
+}
+
+header nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+nav ul {
+    margin: 0 10vh 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+    nav ul li {
+        list-style: none;
+        margin: 7vh 0 0 0;
+        padding: 1vh 4vh;
+    }
+
+        nav ul li a {
+            color: rgb(26, 26, 26);
+            text-decoration: none;
+            font-size: 1.0rem;
+            letter-spacing: 2px;
+            font-family: 'Poppins';
+            transition: 0.5s all;
+            border: transparent;
+        }
+
+.nav-item {
+    position: relative;
+}
+
+    .nav-item a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+    }
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 180px;
+    padding-top: 10px;
+    left: 0;
+    background-color: #F3F2F2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    width: 170px;
+    margin-left: -28px;
+}
+
+.dropdown-menu li {
+    margin-top: -10px;
+    width: 100%;
+    padding: 0px;
+}
+
+    .dropdown-menu li a {
+        /*margin-left: -10px*/
+    }
+
+.dropdown-menu li {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .dropdown-menu li a {
+        color: #555;
+    }
+
+    .dropdown-menu li .add{
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .dropdown-menu li .listando{
+        display: inline-block;
+    }
+
+.button-home {
+    color: rgb(255, 129, 16);
+}
+
+.button-do-register {
+    background-color: rgb(255, 129, 16);
+    color: white;
+    padding: 7px 11px;
+    transition: 0.5s background;
+}
+
+    .button-do-register:hover {
+        background-color: rgb(26, 26, 26);
+    }
+
+.button-do-logout {
+    background-color: rgb(255, 129, 16);
+    color: white;
+    padding: 7px 11px;
+    transition: 0.5s background;
+}
+
+    .button-do-logout:hover {
+        background-color: rgb(26, 26, 26);
+    }
+
+nav ul li:nth-child(-n+4) a {
+    transition: 0.6s border;
+}
+
+    nav ul li:nth-child(-n+4) a:hover {
+        border-bottom: 1px solid rgb(26, 26, 26);
+    }
+
+.article-description {
+    width: 98vh;
+    margin-top: 5vh;
+    margin-left: 10vh;
+    font-weight: 200;
+}
+
+.paragraph-welcome {
+    font-size: 1.1rem;
+    font-family: 'Poppins';
+}
+
+.article-description h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3vh;
+}
+
+.destaque-title {
+    color: rgb(255, 129, 16);
+    width: 1vw;
+}
+
+.paragraph-description {
+    margin-top: 3vh;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+}
+
+.destaque-saber-mais {
+    font-weight: 700;
+}
+
+.article-description-button {
+    margin-top: 5vh;
+    padding: 1vh 5vh;
+    font-size: 1.1rem;
+    background-color: rgb(255, 129, 16);
+    border: 0;
+    color: white;
+    transition: 0.5s background;
+}
+
+    .article-description-button:hover {
+        background-color: rgb(26, 26, 26);
+        cursor: pointer;
+    }
+
+/* aside números informativos */
+
+.aside-info {
+    background-color: rgb(255, 129, 16);
+    display: flex;
+    justify-content: space-around;
+    margin: 0 18vh;
+    align-items: center;
+    position: relative;
+    min-height: 16vh;
+    max-height: 30vh;
+    margin-top: -8vh;
+    z-index: 2;
+}
+
+    .aside-info .paragraph-bold-info {
+        font-size: 1.8rem;
+        font-weight: 700;
+        font-family: 'Poppins';
+    }
+
+    .aside-info div p {
+        font-size: 1.5rem;
+        color: white;
+        font-weight: 500;
+    }
+
+.hora {
+    display: block;
+}
+
+.cidade {
+    display: block;
+}
+
+/* article cards informativos */
+
+main {
+    background-color: rgb(26, 26, 26);
+}
+
+.article-main {
+    padding-top: 12vh;
+    margin: 0 18vh;
+    color: white;
+    padding-bottom: 8vh;
+}
+
+.article-main-text {
+    text-align: center;
+}
+
+    .article-main-text h1 {
+        font-size: 2rem;
+        width: 100vh;
+        margin: auto;
+        line-height: 9vh;
+        margin-bottom: 3vh;
+    }
+
+.destaque-familia {
+    color: rgb(255, 129, 16);
+}
+
+.precos {
+    font-weight: 200;
+    font-size: 1.2rem;
+}
+
+/* cards preços */
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.card-1, .card-2, .card-3 {
+    border: 3px solid rgb(255, 129, 16);
+    padding: 20px;
+    align-items: center;
+    width: 26%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-family: 'Poppins';
+    margin-top: 2vh;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.paragraph-hour {
+    margin: 0 8vh 3vh;
+    padding-bottom: 1vh;
+    border-bottom: 3px dotted white;
+    text-align: center;
+}
+
+.value-hour {
+    font-size: 3.3rem;
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+
+.paragraph-description-categories {
+    margin: 0 3vh;
+    line-height: 1.5rem;
+    word-spacing: 0.1rem;
+    font-weight: 200;
+    height: 220px;
+    text-align: center;
+}
+
+.cards button {
+    padding: 1vh 5vh;
+    font-size: 1.0rem;
+    background-color: rgb(26, 26, 26);
+    border: 3px solid rgb(255, 129, 16);
+    color: white;
+    transition: 0.4s all;
+}
+
+    .cards button:hover {
+        background-color: rgb(255, 129, 16);
+        border: 3px solid white;
+        cursor: pointer;
+    }
+/*passo a passo*/
+.passoLinha {
+    margin-top: 20px;
+}
+
+.passoPasso {
+    color: white;
+    padding-bottom: 80px;
+    padding-top: 30px;
+}
+
+.mainWorks {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.comoFunciona {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/*passo a passo*/
+
+.mainWorks {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+    .mainWorks div p {
+        text-align: center;
+    }
+
+.passoLinha {
+    margin-top: 20px;
+}
+
+.passoPasso {
+    color: white;
+    padding-bottom: 80px;
+    padding-top: 30px;
+}
+
+.comoFunciona {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* aside mapa */
+
+.aside-search-localization {
+    background-color: white;
+    padding-top: 8vh;
+    margin: 0 18vh;
+}
+
+.paragraph-map {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3.5vh;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+.todasInfos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .todasInfos h1 {
+        font-size: 40px
+    }
+
+.tudoVc {
+    width: 50%;
+}
+
+.tudoDestino {
+    width: 50%;
+}
+
+.infoDestino {
+    display: flex;
+    width: 100%;
+}
+
+.inputDestino {
+    width: 70%
+}
+
+    .inputDestino input {
+        width: 90%;
+        max-height: 5vh;
+        min-height: 5vh;
+        font-size: 0.9rem;
+        font-weight: 200;
+        padding-left: 5px;
+        border-radius: 0;
+        border: 3px solid rgb(255, 129, 16);
+        background-color: rgb(26, 26, 26);
+        color: white;
+    }
+
+.botaoDestino {
+    width: 30%;
+}
+
+    .botaoDestino button {
+        width: 100%;
+        max-height: 5vh;
+        min-height: 6vh;
+        font-size: 15px;
+        background-color: rgb(255, 129, 16);
+        color: white;
+        letter-spacing: 0.4px;
+        border: none;
+        cursor: pointer;
+    }
+
+
+
+.infoVc {
+    display: flex;
+    width: 96%;
+}
+
+.inputVc {
+    width: 80%;
+}
+
+    .inputVc input {
+        width: 90%;
+        max-height: 5vh;
+        min-height: 5vh;
+        font-size: 0.9rem;
+        font-weight: 200;
+        padding-left: 5px;
+        border-radius: 0;
+        border: 3px solid rgb(255, 129, 16);
+        background-color: rgb(26, 26, 26);
+        color: white;
+    }
+
+
+.select {
+    width: 40%
+}
+
+select {
+    max-height: 5vh;
+    min-height: 6vh;
+    padding: 5px;
+    border: 3px solid rgb(255, 129, 16);
+    background-color: rgb(255, 129, 16);
+    color: white;
+    width: 100%
+}
+
+    select option {
+        background-color: rgb(255, 129, 16);
+        color: white;
+        letter-spacing: 0.4px;
+        border: none;
+        cursor: pointer;
+    }
+
+/*.form-map label {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.labels {
+    display: flex;
+}
+
+.labelLoc {
+    width: 51%;
+}
+
+.loc {
+    display: flex
+}
+
+
+select {
+    padding: 5px;
+    border: 3px solid rgb(255, 129, 16);
+    background-color: rgb(255, 129, 16);
+    color: white;
+    width: 55%
+}
+
+    select option {
+        background-color: rgb(255, 129, 16);
+        color: white;
+        letter-spacing: 0.4px;
+        border: none;
+        cursor: pointer;
+    }
+
+.labelDestino {
+    width: 30%;
+}
+
+.search-map {
+    padding-top: 1.5vh;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2vh;
+}
+
+    .search-map div {
+        width: 100%;
+    }
+
+        .search-map div #pac-input {
+            padding-bottom: 0.7px;
+            width: 93%;
+        }
+
+        .search-map div input {
+            width: 100%;
+            max-height: 5vh;
+            min-height: 5vh;
+            font-size: 0.9rem;
+            font-weight: 200;
+            padding-left: 8px;
+            border-radius: 0;
+            border: 3px solid rgb(255, 129, 16);
+            background-color: rgb(26, 26, 26);
+            color: white;
+            margin-right: 1%;
+        }
+
+    .search-map .escolhaDestino {
+        margin-left: 20px;
+    }
+
+    .search-map div .destino {
+        width: 62%;
+        padding-top: 1px;
+    }
+
+.form-map .search-map input[type="text"]:focus {
+    border: 3px solid rgb(255, 129, 16);
+    outline: none;
+    background-color: #3b3b3b;
+}
+
+.form-map .buttonPesquisar {
+    width: 33%;
+    padding: 7px 2px 6px 2px;
+    font-size: 15px;
+    background-color: rgb(255, 129, 16);
+    color: white;
+    letter-spacing: 0.4px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.form-map-responsive {
+    display: none;
+}*/
+
+/* Footer */
+
+.footer-main {
+/*    margin-top: 5vh;*/
+    background-color: rgb(255, 129, 16);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.footer-about a {
+    display: inline-block;
+    margin-right: 1vh;
+}
+
+.footer-about, .footer-extra, .footer-contact {
+    width: 20%;
+    color: rgb(26, 26, 26);
+}
+
+.footer-extra {
+    margin-bottom: 3vh;
+}
+
+.footer-main a {
+    color: rgb(26, 26, 26);
+    text-decoration: none;
+}
+
+    .footer-main a:hover {
+        color: white;
+    }
+
+.footer-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 2vh;
+}
+
+.footer-about i {
+    color: white;
+    font-size: 3vh;
+    margin-left: 4%;
+    margin-top: 10px;
+}
+
+.footer-contact i {
+    color: white;
+    margin-right: 1vh;
+}
+
+.footer-copyright {
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 1.8vh;
+}
+
+/* BANNER DO INFOWINDOW DO MAPA */
+
+#car-details {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 400px;
+    width: 100%;
+}
+
+#car-image {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+#car-info {
+    padding: 20px;
+    text-align: center;
+}
+
+/*#choose-car-btn {
+    background-color: #fb8314;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    transition: 0.5s background;
+
+}*/
+
+#choose-car-btn a {
+    text-decoration: none;
+    background-color: #fb8314;
+    color: #ffffff;
+    padding: 15px 0px 15px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    transition: 0.5s background;
+}
+
+#choose-car-btn:hover a {
+    background-color: #000;
+}
+
+
+.card {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 9999;
+    width: 25%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.chat-window {
+    height: 220px;
+    overflow-y: scroll;
+}
+
+.message-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.message-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.send-button {
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+    .send-button:hover {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    }
+
+.eu {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 10px 20px 10px
+}
+
+    .eu span {
+        background-color: white;
+        padding: 5px;
+        border-radius: 10px 10px 10px 10px;
+        color: black;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+    }
+
+.bot {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 10px 10px 10px
+}
+
+    .bot span {
+        background-color: #f3f3f3;
+        color: black;
+        padding: 5px;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+    }
+
+
+
+
+/* This is an example, feel free to delete this code */
+.tooltip-container {
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 17px;
+    /*padding: 0.7em 1.8em;*/
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #fff;
+    position: fixed;
+    bottom: 20px;
+    right: 60px;
+    padding: 10px 50px;
+    z-index: 9999;
+}
+
+    .tooltip-container .borde-back {
+        width: 60px;
+        height: 60px;
+        background-color: #e8e8e8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-shadow: none;
+    }
+
+    .tooltip-container .icon {
+        width: 50px;
+        height: 50px;
+        padding: 7px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        background-color: #ff3cac;
+        background-image: linear-gradient( 225deg, #333 0%, #333 50%, #555 100% );
+        cursor: pointer;
+    }
+
+.tooltip {
+    position: absolute;
+    top: -2;
+    left: -25px; /* Altere a posição inicial para a esquerda, fora da tela */
+    transform: translateX( -42% ); /* Usando translateX para controlar a transição da esquerda para a direita */
+    width: 210px;
+    height: 52px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s;
+    border-radius: 50px;
+    background-color: #ff3cac;
+    background-image: linear-gradient( 225deg, #1c1c1c 0%, #1c1c1c 50%, #555 100% );
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 30px;
+    color: #fff;
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: 800px;
+}
+
+    .tooltip::before {
+        position: absolute;
+        content: "";
+        height: 0.6em;
+        width: 0.6em;
+        right: -0.2em; /* Mude para a direita */
+        top: 50%; /* Altere o topo para o meio da tooltip */
+        transform: translateY(-50%) rotate(45deg); /* Use translateY para centralizar verticalmente */
+        background: var(--background);
+    }
+
+.tooltip-container:hover .tooltip {
+    left: 100%; /* Altere para a posição desejada (a direita) */
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: -10;
+}
+
+.tooltip-container:hover {
+    transform: translateX(-150px);
+    transition: 0.5s linear;
+}
+
+.card-news {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-width: 320px;
+    border-width: 1px;
+    border-color: rgba(219, 234, 254, 1);
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1rem;
+    z-index: 9;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.header-news {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+.icon-news {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #fb8314;
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 1);
+}
+
+.closeButton {
+    border: none;
+    margin-left: 31%;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    height: 2rem;
+    width: 2rem;
+    display: grid;
+    place-items: center;
+    transition: background-color ease 0.25s;
+}
+
+    .closeButton:hover {
+        background-color: rgba(230, 25, 25, 1);
+        color: white;
+        cursor: pointer;
+    }
+
+.icon-news svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+.alert-news {
+    font-weight: 600;
+    color: rgba(107, 114, 128, 1);
+}
+
+.message-news {
+    margin-top: 1rem;
+    color: rgba(107, 114, 128, 1);
+}
+
+.actions-news {
+    margin-top: 1.5rem;
+    border: none;
+}
+
+    .actions-news a {
+        text-decoration: none;
+    }
+
+.mark-as-read,
+.read-news {
+    display: inline-block;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+.read-news {
+    background-color: #fb8314;
+    color: rgba(255, 255, 255, 1);
+    border: none;
+}
+
+    .read-news:hover {
+        background-color: #ff7900;
+        cursor: pointer;
+    }
+
+.mark-as-read {
+    margin-top: 0.5rem;
+    border: none;
+    background-color: rgba(249, 250, 251, 1);
+    color: rgba(107, 114, 128, 1);
+    transition: all 0.15s ease;
+}
+
+    .mark-as-read:hover {
+        background-color: rgb(230, 231, 233);
+    }
+
+
+
+.avaliacaoMain{
+    background-color: rgb(26, 26, 26);
+    padding-top: 55px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+    text-align: center;
+    color: white;
+}
+
+.avaliacaoMain h2{
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.item-carousel-content {
+    margin: auto;
+    width: 40%;
+    border: 3px solid rgb(255, 129, 16);
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 30px;
+}
+
+.item-carousel-content h3 {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.item-carousel-content p {
+    color: white;
+    margin-top: 10px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    width: 100%;
+    min-width: 100%;
+    min-height: 50vh;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+#prevBtn,
+#nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+#prevBtn {
+    left: 0;
+}
+
+#nextBtn {
+    right: 0;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .card-news {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        max-width: 320px;
+        border-width: 1px;
+        border-color: rgba(219, 234, 254, 1);
+        border-radius: 1rem;
+        background-color: rgba(255, 255, 255, 1);
+        padding: 1rem;
+        z-index: 1000;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .mobile-nav {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+        margin-bottom: 20px;
+        height: 5vh;
+    }
+
+
+    .logo-mobile {
+        width: 90px;
+        height: 3vh;
+    }
+
+        .logo-mobile:hover {
+            cursor: pointer;
+        }
+
+    .logo {
+        display: none;
+    }
+
+    header {
+        padding: 0px;
+        margin: 0px;
+        height: 72vh;
+    }
+
+    article {
+        padding-top: 150px;
+    }
+
+    .article-description {
+        width: 92%;
+        padding-top: 1000px;
+        margin: 0px;
+        padding: 15px;
+    }
+
+        .article-description h1 {
+            margin: 0px;
+            font-size: 25px;
+        }
+
+    .paragraph-welcome {
+        font-size: 10px;
+        padding-top: 7vh;
+    }
+
+    .line-style-orange {
+        width: 115px;
+        height: 20px;
+    }
+
+    .paragraph-description {
+        width: 90%;
+        font-size: 15px;
+        margin-right: 0px;
+        padding-right: 0px;
+    }
+
+    .article-description-button {
+        margin-top: 3vh;
+        padding: 0.3vh 2vh;
+        font-size: 15px;
+        background-color: rgb(255, 129, 16);
+        border: 0;
+        color: white;
+        transition: 0.5s background;
+    }
+
+    .hora {
+        display: none;
+    }
+
+    .cidades {
+        display: none;
+    }
+
+    .aside-info .paragraph-bold-info {
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Poppins';
+    }
+
+    .aside-info div p {
+        font-size: 15px;
+        color: white;
+        font-weight: 500;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .aside-info {
+        background-color: rgb(255, 129, 16);
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-left: 0px;
+        align-items: center;
+        position: relative;
+        min-height: 12vh;
+        max-height: 20vh;
+        margin-top: -8vh;
+        z-index: 2;
+    }
+
+    main {
+        background-color: rgb(26, 26, 26);
+    }
+
+    .article-main .paragrafo {
+        font-size: 25px;
+        width: 90%;
+    }
+
+    .article-main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 8vh;
+        margin: 0 0vh;
+        color: white;
+        padding-bottom: 8vh;
+    }
+
+    .article-main-text {
+        margin: 0px;
+        text-align: center;
+    }
+
+        .article-main-text h1 {
+            font-size: 2rem;
+            width: 100vh;
+            margin: auto;
+            line-height: 6vh;
+            margin-bottom: 3vh;
+        }
+
+    .destaque-familia {
+        color: rgb(255, 129, 16);
+    }
+
+    .article-main-text h2 {
+        font-size: 10px;
+    }
+
+    .line-style-orange-article-main {
+        width: 115px;
+        height: 20px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+
+    .card-1, .card-2, .card-3 {
+        border: 3px solid rgb(255, 129, 16);
+        padding: 20px;
+        margin-bottom: 10px;
+        align-items: center;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-family: 'Poppins';
+        margin-top: 2vh;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .paragraph-hour {
+        margin: 0 8vh 3vh;
+        padding-bottom: 1vh;
+        border-bottom: 3px dotted white;
+        text-align: center;
+    }
+
+    .value-hour {
+        font-size: 37px;
+        font-family: 'Poppins';
+        font-weight: 600;
+    }
+
+    .paragraph-description-categories {
+        font-size: 15px;
+        margin: 0 5vh;
+        line-height: 1.5rem;
+        word-spacing: 0.1rem;
+        font-weight: 200;
+        height: 220px;
+        text-align: center;
+    }
+
+    .cards button {
+        padding: 1vh 5vh;
+        font-size: 1.0rem;
+        background-color: rgb(26, 26, 26);
+        border: 3px solid rgb(255, 129, 16);
+        color: white;
+        transition: 0.4s all;
+    }
+
+        .cards button:hover {
+            background-color: rgb(255, 129, 16);
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+    .passoPasso {
+        overflow-x: hidden;
+    }
+
+    .mainWorks {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        overflow-x: auto;
+        margin-left: 0px;
+    }
+
+        .mainWorks div p {
+            text-align: center;
+        }
+
+    .passoLinha {
+        margin-top: 20px;
+    }
+
+    .passoPasso {
+        color: white;
+        padding-bottom: 80px;
+        padding-top: 30px;
+    }
+
+    .comoFunciona {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .mainWorks div {
+        margin-right: 0px;
+    }
+
+    .efetue {
+        padding-right: 22px;
+    }
+
+    .aside-search-localization {
+        background-color: white;
+        padding-top: 8vh;
+        margin: 0 1vh;
+    }
+
+    /*.form-map-responsive {
+        display: block;
+        margin-bottom: 30px;
+    }*/
+
+    /*    .aside-search-localization label {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .aside-search-localization p {
+        font-size: 10px;
+    }*/
+
+    .paragraph-map {
+        display: none;
+    }
+
+    .todasInfos {
+        display: block;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .tudoVc {
+        width: 100%;
+        margin-bottom: 10px
+    }
+
+    .todasInfos h1 {
+        font-size: 20px;
+    }
+
+    .infoVc {
+        width: 100%
+    }
+
+    .inputVc {
+        width: 50%
+    }
+
+    .select {
+        width: 40%
+    }
+
+    .tudoDestino {
+        width: 100%;
+    }
+
+    .inputDestino {
+        width: 50%;
+    }
+
+    .botaoDestino {
+        width: 40%
+    }
+
+    .avaliacaoMain h2{
+        font-size: 25px;
+    }
+
+    .footer-about {
+        width: 100%;
+    }
+
+    .footer-title {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .footer-main {
+        flex-direction: column;
+    }
+
+    .footer-about a {
+        display: inline-block;
+        margin-right: 0vh;
+    }
+
+    .footer-about, .footer-extra, .footer-contact {
+        width: 100%;
+        color: rgb(26, 26, 26);
+    }
+
+    .footer-extra {
+        margin-bottom: 3vh;
+    }
+
+    .footer-main a {
+        color: rgb(26, 26, 26);
+        text-decoration: none;
+    }
+
+        .footer-main a:hover {
+            color: white;
+        }
+
+    .footer-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        margin-top: 2vh;
+    }
+
+    footer p {
+        font-size: 15px;
+    }
+
+    .footer-about i {
+        color: white;
+        font-size: 3vh;
+        margin-left: 4%;
+        margin-top: 10px;
+    }
+
+    .footer-contact i {
+        color: white;
+        margin-right: 1vh;
+    }
+
+    .footer-copyright {
+        text-align: center;
+        letter-spacing: 2px;
+        font-weight: 400;
+        font-size: 1.8vh;
+    }
+
+
+    .card {
+        position: fixed;
+        bottom: 140px;
+        right: 10px;
+        z-index: 9999;
+        width: 94%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .tooltip-container {
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 17px;
+        /*padding: 0.7em 1.8em;*/
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: #fff;
+        position: fixed;
+        bottom: 20px;
+        right: 5px;
+        padding: 10px 20px;
+        z-index: 9999;
+    }
+
+        .tooltip-container .borde-back {
+            width: 60px;
+            height: 60px;
+            background-color: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: none;
+        }
+
+        .tooltip-container .icon {
+            width: 50px;
+            height: 50px;
+            padding: 7px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background-color: #ff3cac;
+            background-image: linear-gradient( 225deg, #333 0%, #333 50%, #555 100% );
+            cursor: pointer;
+        }
+
+    .tooltip {
+        position: absolute;
+        top: -2;
+        left: -45px; /* Altere a posição inicial para a esquerda, fora da tela */
+        transform: translateX( -32% ); /* Usando translateX para controlar a transição da esquerda para a direita */
+        width: 110px;
+        height: 52px;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.6s;
+        border-radius: 50px;
+        background-color: #ff3cac;
+        background-image: linear-gradient( 225deg, #1c1c1c 0%, #1c1c1c 50%, #555 100% );
+        display: none;
+        align-items: center;
+        justify-content: right;
+        padding-right: 30px;
+        color: #fff;
+        font-size: 18px;
+        font-family: sans-serif;
+        font-weight: 800px;
+    }
+
+        .tooltip::before {
+            position: absolute;
+            content: "";
+            height: 0.6em;
+            width: 0.6em;
+            right: -0.2em; /* Mude para a direita */
+            top: 50%; /* Altere o topo para o meio da tooltip */
+            transform: none; /* Use translateY para centralizar verticalmente */
+            background: var(--background);
+            display: none
+        }
+
+    .tooltip-container:hover .tooltip {
+        left:; /* Altere para a posição desejada (a direita) */
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        z-index: -10;
+        display:none
+    }
+
+    .tooltip-container:hover {
+        transform: none;
+        transition: 0.5s linear;
+    }
+
+}

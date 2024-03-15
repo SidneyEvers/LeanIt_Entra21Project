@@ -1,0 +1,650 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav-link {
+    color: #FF8110;
+}
+
+header {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 20vh;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    margin: 7vh 0 0 10vh;
+    width: 20vh;
+    height: 5vh;
+}
+
+#map {
+}
+
+#logout {
+    cursor: pointer;
+}
+
+header nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+nav ul {
+    margin: 0 10vh 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+    nav ul li {
+        list-style: none;
+        margin: 7vh 0 0 0;
+        padding: 1vh 4vh;
+    }
+
+        nav ul li a {
+            color: rgb(26, 26, 26);
+            text-decoration: none;
+            font-size: 1.0rem;
+            letter-spacing: 2px;
+            font-family: 'Poppins';
+            transition: 0.5s all;
+            border: transparent;
+        }
+
+.nav-item {
+    position: relative;
+}
+
+    .nav-item a {
+        display: block;
+        text-decoration: none;
+        color: #333;
+    }
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 180px;
+    padding-top: 10px;
+    left: 0;
+    background-color: #F3F2F2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    width: 170px;
+    margin-left: -28px;
+}
+
+.dropdown-menu li {
+    margin-top: -10px;
+    width: 100%;
+    padding: 0px;
+}
+
+    .dropdown-menu li a {
+        /*margin-left: -10px*/
+    }
+
+.dropdown-menu li {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .dropdown-menu li a {
+        color: #555;
+    }
+
+    .dropdown-menu li .add {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .dropdown-menu li .listando {
+        display: inline-block;
+    }
+
+.button-home {
+    color: rgb(255, 129, 16);
+}
+
+.button-do-register {
+    background-color: rgb(255, 129, 16);
+    color: white;
+    padding: 7px 11px;
+    transition: 0.5s background;
+}
+
+    .button-do-register:hover {
+        background-color: rgb(26, 26, 26);
+    }
+
+.button-do-logout {
+    background-color: rgb(255, 129, 16);
+    color: white;
+    padding: 7px 11px;
+    transition: 0.5s background;
+}
+
+    .button-do-logout:hover {
+        background-color: rgb(26, 26, 26);
+    }
+
+nav ul li:nth-child(-n+4) a {
+    transition: 0.6s border;
+}
+
+    nav ul li:nth-child(-n+4) a:hover {
+        border-bottom: 1px solid rgb(26, 26, 26);
+    }
+
+.pnavbar {
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.conteudo {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+.titulo {
+    width: 84%;
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .titulo a {
+        color: black;
+        cursor: pointer;
+    }
+
+        .titulo a:hover {
+            color: rgb(255, 129, 16);
+        }
+
+    .titulo .voltar {
+        margin-top: 10px;
+    }
+
+.formu {
+    margin-top: 70px;
+}
+
+.preencher {
+    width: 100%;
+    margin-left: 40px;
+}
+
+
+
+
+.caminhos {
+    width: 80%;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+    .caminhos a {
+        color: black;
+    }
+
+.historico {
+    background-color: rgb(255, 129, 16);
+}
+
+.caminhos .historico {
+    border: 2px solid rgb(255, 129, 16);
+    padding: 5px;
+}
+
+
+
+.caminhos .outros {
+    border-bottom: 2px solid rgb(255, 129, 16);
+    border-left: 2px solid rgb(255, 129, 16);
+    border-right: 2px solid rgb(255, 129, 16);
+    padding: 5px;
+}
+
+.card {
+    margin-top: 90px;
+}
+
+.dados {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background-color: rgba(223, 223, 223, 0.219);
+    box-shadow: 3px 3px 3px rgba(230, 229, 229, 0.668);
+    padding: 25px;
+}
+
+.carro {
+    width: 100%;
+}
+
+.informacaoCarro {
+    margin-bottom: 110px;
+}
+
+.marca {
+    color: rgb(163, 163, 163);
+}
+
+
+.informacaoTempo {
+    width: 80%;
+    background-color: rgba(223, 223, 223, 0.219);
+    box-shadow: 3px 3px 3px rgba(230, 229, 229, 0.668);
+    margin-top: 10px;
+    padding: 25px;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.valor {
+    color: rgb(255, 129, 16);
+}
+
+
+
+.footer-main {
+    margin-top: 9vh;
+    background-color: rgb(255, 129, 16);
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.footer-about, .footer-extra, .footer-contact {
+    width: 20%;
+    color: rgb(26, 26, 26);
+}
+
+.footer-extra {
+    margin-bottom: 3vh;
+}
+
+.footer-main a {
+    color: rgb(26, 26, 26);
+    text-decoration: none;
+}
+
+    .footer-main a:hover {
+        color: white;
+    }
+
+.footer-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 2vh;
+}
+
+.footer-about i {
+    color: white;
+    font-size: 3vh;
+    margin-left: 4%;
+    margin-top: 10px;
+}
+
+.footer-contact i {
+    color: white;
+    margin-right: 1vh;
+}
+
+.footer-copyright {
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 1.8vh;
+}
+
+
+.pagedList {
+    text-decoration: none;
+    flex-direction: row;
+    justify-content: center;
+}
+
+    .pagedList ul {
+        display: flex;
+        gap: 50px;
+        justify-content: center;
+        list-style: none;
+    }
+
+    .pagedList li {
+        text-decoration: none;
+        color: #000;
+        list-style: none;
+    }
+
+    .pagedList a {
+        text-decoration: none;
+    }
+
+.mobile-nav {
+    display: none;
+}
+
+.rating-stars-container {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.star-label svg {
+    fill: rgb(210, 210, 210);
+    width: 30px;
+    height: auto;
+}
+
+.rating-stars-container input {
+    appearance: unset;
+}
+
+
+.overlay {
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 17px;
+    /*padding: 0.7em 1.8em;*/
+    width: 17%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #fff;
+    position: fixed;
+    bottom: 40%;
+    left: 20px;
+    padding: 10px 50px;
+    z-index: 1;
+}
+
+#inputExternalImage {
+    border: none;
+}
+
+.divImg .imgPerfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.divImg {
+    width: 260px;
+    height: 235px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px
+}
+
+@media screen and (max-width: 800px) {
+    header {
+        display: none;
+    }
+
+    .mobile-nav {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .logo-mobile {
+        width: 90px;
+        height: 3vh;
+    }
+
+        .logo-mobile:hover {
+            cursor: pointer;
+        }
+
+    .caminhos {
+        width: 87%;
+        cursor: pointer;
+    }
+
+
+    .conteudo {
+        display: block;
+        margin-left: 0px
+    }
+
+    .preencher {
+        display: block;
+        margin-left: 12px;
+    }
+
+    .pnavbar {
+        text-align: center;
+        font-size: 20px
+    }
+
+    .divImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 320px;
+        width: 80%;
+        margin-left: 42px
+    }
+
+    .titulo {
+        margin-top: 50px;
+        width: 90%;
+        display: block;
+        text-align: center;
+    }
+
+    .voltar {
+        display: none;
+    }
+
+    /*    .informacoes{
+        width: 100%;
+    }
+
+    .informacoes div{
+        width: 90%;
+    }*/
+
+    #carroCarga{
+        width: 122%
+    }
+    .formu {
+        margin-top: 20px;
+    }
+
+        .formu input {
+            width: 88%;
+            border: 2px solid rgb(255, 129, 16);
+            padding: 8px;
+            margin-bottom: 2px;
+        }
+
+        .formu .enviar {
+            width: 120%;
+            background-color: rgb(255, 129, 16);
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+    .enviar:hover {
+        background-color: rgb(255, 161, 79);
+        transition: 0.5s;
+        border: solid 2px rgb(255, 161, 79);
+        cursor: pointer;
+    }
+
+    .footer-about {
+        width: 100%;
+    }
+
+    .footer-title {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .footer-main {
+        flex-direction: column;
+    }
+
+    .footer-about a {
+        display: inline-block;
+        margin-right: 0vh;
+    }
+
+    .footer-about, .footer-extra, .footer-contact {
+        width: 100%;
+        color: rgb(26, 26, 26);
+    }
+
+    .footer-extra {
+        margin-bottom: 3vh;
+    }
+
+    .footer-main a {
+        color: rgb(26, 26, 26);
+        text-decoration: none;
+    }
+
+        .footer-main a:hover {
+            color: white;
+        }
+
+    .footer-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        margin-top: 2vh;
+    }
+
+    .imgCarro {
+        width: 114%;
+        height: 150px;
+    }
+
+    footer p {
+        font-size: 15px;
+    }
+
+    .footer-about i {
+        color: white;
+        font-size: 3vh;
+        margin-left: 4%;
+        margin-top: 10px;
+    }
+
+    .footer-contact i {
+        color: white;
+        margin-right: 1vh;
+    }
+
+    .footer-copyright {
+        text-align: center;
+        letter-spacing: 2px;
+        font-weight: 400;
+        font-size: 1.8vh;
+    }
+
+    .rating-stars-container {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .star-label svg {
+        fill: rgb(210, 210, 210);
+        width: 30px;
+        height: auto;
+    }
+
+    .rating-stars-container input {
+        display: none;
+        appearance: unset;
+    }
+}
+
+
+
+@media screen and (max-width: 280px) {
+    .formu .enviar {
+        width: 95%;
+        background-color: rgb(255, 129, 16);
+        margin-top: 20px;
+        margin-bottom: 60px;
+    }
+
+
+    .informacoes {
+        width: 91%;
+        margin-left: 21px
+    }
+
+        .informacoes div {
+            width: 100%;
+        }
+
+    .pnavbar {
+        text-align: center;
+        margin-left: 35px
+    }
+
+    .caminhos {
+        width: 86.5%;
+        margin-left: 21px;
+        cursor: pointer;
+    }
+
+    .divImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 320px;
+        width: 80%;
+        margin-left: 30px
+    }
+
+    .card div{
+        width: 85%
+    }
+
+    .preencher{
+        margin-left: 0px
+    }
+
+    .imgCarro {
+        width: 100%;
+        height: 150px;
+    }
+}
